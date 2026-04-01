@@ -1,0 +1,2 @@
+04/01/2026 - Made a change to the player.py program and commented out all the print(self.evaluated) statements
+This change was made because it would show the strength of the computer player's hand before the player calls trump or not.
