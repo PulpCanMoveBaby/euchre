@@ -4,16 +4,25 @@ import random, time
 
 class GameEuchre:
     def __init__(self, play):
+        
         self.deck = Deck()
-        self.player1 = Computer('COMPUTER1')
-        self.player2 = Computer('COMPUTER2')
-        self.player3 = Computer('COMPUTER3')
+        
         if play:
-            self.player4 = Player('PLAYER4')
+            self.player1 = Computer('Brad')
+            self.player2 = Computer('Jeff (teammate)')
+            self.player3 = Computer('Dave')
+            self.player4 = Player('You')
         else:
+            self.player1 = Computer('COMPUTER1')
+            self.player2 = Computer('COMPUTER2')
+            self.player3 = Computer('COMPUTER3')
             self.player4 = Computer('COMPUTER4')
-        self.tricksdict = dict(COMPUTER1 = 0, COMPUTER2 = 0, COMPUTER3 = 0, COMPUTER4 = 0)
-        self.went_alone = dict(COMPUTER1 = 0, COMPUTER2 = 0, COMPUTER3 = 0, COMPUTER4 = 0)
+        if play:
+            self.tricksdict = {'Brad': 0, 'Jeff (teammate)': 0, 'Dave' :0, 'You' : 0}
+            self.went_alone = {'Brad': 0, 'Jeff (teammate)': 0, 'Dave' :0, 'You' : 0}
+        else:
+            self.tricksdict = dict(COMPUTER1 = 0, COMPUTER2 = 0, COMPUTER3 = 0, COMPUTER4 = 0)
+            self.went_alone = dict(COMPUTER1 = 0, COMPUTER2 = 0, COMPUTER3 = 0, COMPUTER4 = 0)
         self.gotsetdict = dict(EVEN = 0, ODD = 0)
         self.totalpointsdict = dict(EVEN = 0, ODD = 0)
         self.team1 = [self.player1, self.player3]
@@ -80,7 +89,6 @@ class GameEuchre:
             #go around for the first opportunity to call the turncard
 
             for player in self.table:
-                #added this 1/18/2023--------------------------------------------
                 team = self.team1 if player in self.team1 else self.team2 
                 teammate = team[1] if player == team[0] else team[0] 
                 #---------------------------------------------------------------- 
@@ -91,7 +99,7 @@ class GameEuchre:
                     self.called = player
                     if player.__class__ == Player:
                         self.preCallStats(player)
-                        res = input("Do you want to go alone? Press 'y' for yes, press enter for no. ")
+                        res = input("\n\nDo you want to go alone? Press 'y' for yes, press enter for no. ")
                         if res.lower() in ['y','yes']:
                             self.go_alone = True
                     else:
@@ -163,7 +171,8 @@ class GameEuchre:
             if self.observe:
                 print("SET!!!!!")
             self.team1score[1] += 2
-            self.gotsetdict['EVEN'] += 1
+            if not play:
+                self.gotsetdict['EVEN'] += 1
             self.anothertrick = False
             self.team1score[0] = 0
             self.team2score[0] = 0
@@ -174,7 +183,8 @@ class GameEuchre:
             if self.observe:
                 print("SET!!!!!")
             self.team2score[1] += 2
-            self.gotsetdict['ODD'] += 1
+            if not play:
+                self.gotsetdict['ODD'] += 1
             self.anothertrick = False
             self.team1score[0] = 0
             self.team2score[0] = 0
@@ -440,10 +450,18 @@ class GameEuchre:
     def score(self):
         print(F"\n\t\t\t    Number of Tricks Taken:")
         print('\t\t\t   '+'-'*25)
-        print(F"\t\t\tTeam Odd: {self.team1score[0]} ------- Team Even: {self.team2score[0]}")
+        if play:
+            print(F"\t\t\tVillians: {self.team1score[0]} ------- Heroes: {self.team2score[0]}")
+        else:
+            print(F"\t\t\tTeam Odd: {self.team1score[0]} ------- Team Even: {self.team2score[0]}")
+
         print(F"\n\t\t\t          Total Score:")
         print('\t\t\t   '+'-'*25)
-        print(F"\t\t\tTeam Odd: {self.team1score[1]} ------- Team Even: {self.team2score[1]}")
+        if play:
+            print(F"\t\t\tVillians: {self.team1score[1]} ------- Heroes: {self.team2score[1]}")
+        else:
+            print(F"\t\t\tTeam Odd: {self.team1score[1]} ------- Team Even: {self.team2score[1]}")
+
 
     def converttonum(self, player = None, hand = None, currenttrick = None):
         if currenttrick:
@@ -565,8 +583,10 @@ class GameEuchre:
             input("Press enter to play some Euchre...")
 
     def winscreen(self):
-
-        win = "Team Even" if self.team1score < self.team2score else "Team Odd"
+        if play:
+            win = "Villians" if self.team1score > self.team2score else "Heroes"
+        else:
+            win = "Team Even" if self.team1score < self.team2score else "Team Odd"
         print("We have a winner!!!  " + win + '!!!!!!!!' )
         print(F"Team 1: {self.team1score} \nTeam2: {self.team2score}")
         winners_team = []
