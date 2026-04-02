@@ -10,6 +10,7 @@
 ## Features
 
   - Play against AI computer players using rule-based logic
+  - Play with one AI computer player who makes a habit of coming through in the clutch
   - Real-time scoring and tricks displayed so you can easily plan your attack
   - Simple guided instructions throughout gameplay
   - Simulation mode:
