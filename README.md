@@ -1,7 +1,7 @@
 # Classic Euchre - Right in Your Terminal
 
   Test your Euchre skills against computer players using algorithmic strategy. 
-  The advanced trick-taking logic of the players make this a fun a challenging way to hone and/or improve your Euchre skills.
+  The advanced trick-taking logic of the players make this a fun and challenging way to hone and/or improve your Euchre skills.
   Or if you're just looking to kick back and play, you will find all the Euchre your heart desires right here.
   You have come to the right place!
 
