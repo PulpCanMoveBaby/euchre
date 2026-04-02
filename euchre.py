@@ -598,9 +598,6 @@ class GameEuchre:
         spacer = '|||' + ' '*94 + '|||'
         phrases = ['WE HAVE A WINNER!!!!!!', spacer, F"{win}", spacer, F"Team Odd Score: {self.team1score[1]} Team Even Score: {self.team2score[1]}",
                 spacer, 'The winning players are:', spacer, F'{winners_team[0]} and {winners_team[1]}',
-                spacer, 'I know you will go on to do great things...',
-                'Winning this game is really just the beginning for you.',spacer,spacer,'I bet the funniest thing a person says when they are being secretly recorded,',
-                'would be whatever comes right before "I\'m glad no one heard that."',
                 spacer, spacer, 'Thanks for playing and I hope you enjoyed my game,', spacer, '-Kyle Sullivan']
 
         print('-'*100)
